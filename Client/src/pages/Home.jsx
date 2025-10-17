@@ -2,7 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { HeartPulse, Stethoscope, Syringe, ShieldPlus, Ambulance, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import pic1 from "../assets/health1"
+import pic1 from "../assets/health2.png"
+import pic2 from "../assets/health1.png"
 
 export default function Home() {
   const services = [
@@ -52,7 +53,7 @@ export default function Home() {
             className="flex-1"
           >
             <img
-              src=""
+              src={pic1}
               alt="Healthcare illustration"
               className="w-full rounded-xl shadow-lg"
             />
@@ -102,7 +103,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            src="https://cdn.pixabay.com/photo/2016/03/31/19/58/doctor-1295581_1280.png"
+            src={pic2}
             alt="About healthcare"
             className="w-full md:w-1/2 rounded-xl shadow-lg"
           />
