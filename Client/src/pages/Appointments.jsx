@@ -1,202 +1,191 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays, User, Mail, Phone, Stethoscope, MessageSquare } from "lucide-react";
+import { Calendar, Clock, User, Stethoscope, Phone } from "lucide-react";
 
 export default function Appointments() {
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     name: "",
-    email: "",
     phone: "",
-    department: "",
+    service: "",
+    doctor: "",
     date: "",
-    message: "",
+    time: "",
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Thank you, ${formData.name}! Your appointment has been requested successfully.`);
-    setFormData({
+    alert("✅ Appointment booked successfully!");
+    console.log("Appointment Details:", form);
+    setForm({
       name: "",
-      email: "",
       phone: "",
-      department: "",
+      service: "",
+      doctor: "",
       date: "",
-      message: "",
+      time: "",
     });
   };
 
   return (
-    <div className="text-gray-800">
-      {/* 🏥 Hero Section */}
-      <section className="bg-gradient-to-r from-blue-50 to-white py-20 text-center">
+    <div className="bg-gray-50 text-gray-800 min-h-screen">
+      
+      {/* Hero Section */}
+      <section className="text-center py-20 bg-gradient-to-r from-blue-100 to-blue-200">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-blue-700 mb-4"
+          className="text-4xl md:text-5xl font-bold text-blue-800 mb-4"
         >
-          Book an Appointment
+          Book Your Appointment
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-gray-600 max-w-2xl mx-auto text-lg"
-        >
-          Schedule a visit with our experienced doctors. We’ll get back to confirm your appointment as soon as possible.
-        </motion.p>
+        <p className="max-w-2xl mx-auto text-lg text-gray-700">
+          Schedule your visit easily with our online booking system.  
+          Choose your doctor, service, and preferred time — we’ll take care of the rest.
+        </p>
       </section>
 
-      {/* 🩺 Appointment Form */}
-      <section className="py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-6 bg-blue-50 p-10 rounded-2xl shadow-md">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+      {/* Appointment Form Section */}
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 border border-gray-100">
+          <h2 className="text-3xl font-semibold text-blue-800 mb-8 text-center">
+            Appointment Form
+          </h2>
+
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-blue-700 mb-8 text-center"
+            className="grid md:grid-cols-2 gap-6"
           >
-            Fill in Your Details
-          </motion.h2>
-
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
-            <div className="col-span-1">
-              <label className="block mb-2 font-medium text-gray-700">Full Name</label>
-              <div className="flex items-center border border-blue-200 bg-white rounded-lg px-3">
-                <User className="text-blue-500 mr-2" size={18} />
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your full name"
-                  className="w-full py-2 outline-none bg-transparent"
-                />
-              </div>
-            </div>
-
-            {/* Email */}
-            <div className="col-span-1">
-              <label className="block mb-2 font-medium text-gray-700">Email</label>
-              <div className="flex items-center border border-blue-200 bg-white rounded-lg px-3">
-                <Mail className="text-blue-500 mr-2" size={18} />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="you@example.com"
-                  className="w-full py-2 outline-none bg-transparent"
-                />
-              </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                <User className="inline w-4 h-4 mr-1 text-blue-600" /> Full Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
             </div>
 
             {/* Phone */}
-            <div className="col-span-1">
-              <label className="block mb-2 font-medium text-gray-700">Phone Number</label>
-              <div className="flex items-center border border-blue-200 bg-white rounded-lg px-3">
-                <Phone className="text-blue-500 mr-2" size={18} />
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder="+91 9876543210"
-                  className="w-full py-2 outline-none bg-transparent"
-                />
-              </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                <Phone className="inline w-4 h-4 mr-1 text-green-600" /> Phone Number
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
             </div>
 
-            {/* Department */}
-            <div className="col-span-1">
-              <label className="block mb-2 font-medium text-gray-700">Department</label>
-              <div className="flex items-center border border-blue-200 bg-white rounded-lg px-3">
-                <Stethoscope className="text-blue-500 mr-2" size={18} />
-                <select
-                  name="department"
-                  value={formData.department}
-                  onChange={handleChange}
-                  required
-                  className="w-full py-2 outline-none bg-transparent"
-                >
-                  <option value="">Select Department</option>
-                  <option value="General">General Medicine</option>
-                  <option value="Cardiology">Cardiology</option>
-                  <option value="Pediatrics">Pediatrics</option>
-                  <option value="Orthopedics">Orthopedics</option>
-                  <option value="Dermatology">Dermatology</option>
-                </select>
-              </div>
+            {/* Service */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                <Stethoscope className="inline w-4 h-4 mr-1 text-red-600" /> Select Service
+              </label>
+              <select
+                name="service"
+                value={form.service}
+                onChange={handleChange}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              >
+                <option value="">-- Choose a Service --</option>
+                <option value="General Checkup">General Checkup</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Dental">Dental</option>
+                <option value="Dermatology">Dermatology</option>
+              </select>
+            </div>
+
+            {/* Doctor */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                👨‍⚕️ Select Doctor
+              </label>
+              <select
+                name="doctor"
+                value={form.doctor}
+                onChange={handleChange}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              >
+                <option value="">-- Choose a Doctor --</option>
+                <option value="Dr. Anita Sharma">Dr. Anita Sharma — Cardiologist</option>
+                <option value="Dr. Raj Patel">Dr. Raj Patel — General Physician</option>
+                <option value="Dr. Neha Verma">Dr. Neha Verma — Pediatrician</option>
+                <option value="Dr. Arjun Singh">Dr. Arjun Singh — Dentist</option>
+              </select>
             </div>
 
             {/* Date */}
-            <div className="col-span-1">
-              <label className="block mb-2 font-medium text-gray-700">Preferred Date</label>
-              <div className="flex items-center border border-blue-200 bg-white rounded-lg px-3">
-                <CalendarDays className="text-blue-500 mr-2" size={18} />
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  required
-                  className="w-full py-2 outline-none bg-transparent"
-                />
-              </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                <Calendar className="inline w-4 h-4 mr-1 text-purple-600" /> Date
+              </label>
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                onChange={handleChange}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
             </div>
 
-            {/* Message */}
-            <div className="col-span-1 md:col-span-2">
-              <label className="block mb-2 font-medium text-gray-700">Message (Optional)</label>
-              <div className="flex items-start border border-blue-200 bg-white rounded-lg px-3">
-                <MessageSquare className="text-blue-500 mr-2 mt-2" size={18} />
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="4"
-                  placeholder="Describe your health concern..."
-                  className="w-full py-2 outline-none bg-transparent resize-none"
-                ></textarea>
-              </div>
+            {/* Time */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                <Clock className="inline w-4 h-4 mr-1 text-orange-600" /> Time
+              </label>
+              <input
+                type="time"
+                name="time"
+                value={form.time}
+                onChange={handleChange}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
             </div>
 
             {/* Submit */}
-            <div className="col-span-1 md:col-span-2 text-center mt-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <div className="md:col-span-2 text-center mt-4">
+              <button
                 type="submit"
-                className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-blue-700 transition"
+                className="bg-blue-600 text-white py-3 px-8 rounded-full font-semibold shadow hover:bg-blue-700 transition"
               >
-                Request Appointment
-              </motion.button>
+                Book Appointment
+              </button>
             </div>
-          </form>
+          </motion.form>
         </div>
       </section>
 
-      {/* ❤️ Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
-        >
-          <h2 className="text-3xl font-bold mb-4">We’re Ready to Help You Feel Better</h2>
-          <p className="text-blue-100 mb-8">
-            Our specialists are always here to listen and guide you toward a healthier tomorrow.
-          </p>
-        </motion.div>
+      {/* Info Section */}
+      <section className="py-16 bg-blue-50 text-center">
+        <h2 className="text-3xl font-semibold text-blue-800 mb-4">Need Immediate Help?</h2>
+        <p className="text-gray-600 mb-6">
+          For emergencies or urgent cases, please call our 24/7 helpline.
+        </p>
+        <p className="text-lg font-semibold text-blue-700">📞 +91 98765 43210</p>
       </section>
     </div>
   );
