@@ -185,7 +185,7 @@ export default function Appointments() {
         <p className="text-gray-600 mb-6">
           For emergencies or urgent cases, please call our 24/7 helpline.
         </p>
-        <p className="text-lg font-semibold text-blue-700">📞 +91 98765 43210</p>
+        <p className="text-lg font-semibold text-blue-700">📞 +91 9339652501</p>
       </section>
     </div>
   );
